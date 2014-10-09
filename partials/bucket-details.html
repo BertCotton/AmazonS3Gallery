@@ -1,7 +1,7 @@
 <h2><a href="#/buckets">Buckets</a> >> {{bucketName}}</h2>
-<img src=/img/loading.gif height=40 ng-show="bucketDetails == null"/>
+<img src=/img/loading.gif height=40 ng-show="!bucketDetails.length"/>
 <ul class='objects'>
 	<li ng-repeat="object in bucketDetails" class="bucket">
-		<a ng-href="download.php?bucket={{bucketName}}&id={{object.Key}}">{{object.Key}} [{{object.LastModified}}]</a>
+		<a ng-href="php/download.php?bucket={{bucketName}}&id={{object.Key}}">{{object.Key}} [{{object.LastModified}}]</a>
 	</li>
 </ul>

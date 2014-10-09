@@ -1,6 +1,6 @@
 'use strict';
 
-var pictureApp = angular.module('pictureApp', ['ngRoute', 'pictureControllers', 'pictureFilters', 'pictureServices', 'ui.bootstrap']);
+var pictureApp = angular.module('pictureApp', ['ngRoute', 'ui.bootstrap', 'pictureControllers', 'pictureFilters', 'pictureServices']);
 
 pictureApp.config(['$routeProvider', 
 		function($routeProvider)
@@ -16,6 +16,13 @@ pictureApp.config(['$routeProvider',
 				controller: 'BucketDetailsCtrl'
 
 			}).
+			when('/buckets/:name/:prefix', 
+			{
+				templateUrl: 'partials/bucket-details.html',
+				controller: 'BucketDetailsCtrl'
+
+			})
+			.
 			otherwise({ 
 				redirectTo: '/buckets'});
 		}]);

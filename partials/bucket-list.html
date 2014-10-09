@@ -1,5 +1,7 @@
+<h2>Buckets</h2>
+<img src=/img/loading.gif height=40 ng-show="!buckets.length"/>
 <ul class='buckets'>
 	<li ng-repeat="bucket in buckets" class="bucket">
-		<a href="#/buckets/{{bucket.Name}}">{{bucket.Name}}</a>
+		<img class="fa-folder"/><a href="#/buckets/{{bucket.Name}}">{{bucket.Name}}</a>
 	</li>
 </ul>

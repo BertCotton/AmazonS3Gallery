@@ -1,9 +1,7 @@
 <?php
-
-    if (!$settings = parse_ini_file(settings.ini, TRUE)) throw new exception('Unable to open ' . $file . '.');
-
-    
-require 'vendor/autoload.php';
+include 'common.php';
+global $settings;
+global $cache;
 
 use Aws\S3\S3Client;
 
@@ -15,41 +13,25 @@ $client = S3Client::factory(array(
 		'region' => $settings['s3']['region']
 	));
 
-
-
-
-
 header('Content-Type: application/json');
 
-echo '[
+$jsonBuckets = $cache->get("buckets");
+if ($jsonBuckets != null)
 {
-"Name": "cottons",
-"CreationDate": "2012-08-26T19:54:49.000Z"
-},
-{
-"Name": "feedlot-server-pictures",
-"CreationDate": "2013-10-15T02:00:18.000Z"
-},
-{
-"Name": "treb-logs",
-"CreationDate": "2012-08-16T14:46:20.000Z"
-},
-{
-"Name": "treb-svn-backups",
-"CreationDate": "2013-10-15T02:00:30.000Z"
-}
-]'
+	echo json_encode($jsonBuckets);
+	return;
 
-// $buckets = $client->listBuckets();
-// $jsonBuckets = array();
-// foreach ($buckets['Buckets'] as $bucket)
-// {
-// 	$bucketData = array();
-// 	$bucketData['Name'] = $bucket['Name'];
-// 	$bucketData['CreationDate'] = $bucket['CreationDate'];
-
-// 	array_push($jsonBuckets, $bucketData);
-// }
-//echo json_encode($jsonBuckets);
+$buckets = $client->listBuckets();
+$jsonBuckets = array();
+ foreach ($buckets['Buckets'] as $bucket)
+ {
+ 	$bucketData = array();
+	foreach ($object as $key => $value) {
+		$bucketData[$key] = $value;
+	}
+ 	array_push($jsonBuckets, $bucketData);
+ }
+$cache->set("buckets", $jsonBuckets,6000);
+echo json_encode($jsonBuckets);
 
 ?>

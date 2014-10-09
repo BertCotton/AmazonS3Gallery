@@ -6,14 +6,20 @@
 
 		<link rel="stylesheet" href="/css/bootstrap.min.css" >
 		<link rel="stylesheet" href="/css/bootstrap-theme.min.css" >
-		
+		<link rel="stylesheet" href="/css/font-awesome.min.css" >
+		<link rel="stylesheet" href="/css/gallery.css" >
+				
 	</head>
 	<body>
-		<div class="view-container">
-    		<div ng-view class="view-frame"></div>
-  		</div>
-
-
+		<div class="nav navbar">
+			<ul>
+				<li>Pictures</li>
+			</ul>
+		</div>
+		<div class="container">
+			<div ng-view ></div>
+		</div>
+  		
 		<script src="js/angular.min.js"></script>
 		<script src="js/angular-animate.min.js"></script>
 		<script src="js/angular-route.min.js"></script>

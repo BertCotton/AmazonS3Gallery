@@ -10,5 +10,6 @@ pictureControllers.controller('BucketCtrl', ['$scope', 'Bucket',
 pictureControllers.controller('BucketDetailsCtrl', ['$scope', "$routeParams", 'BucketDetails', 
 	function($scope, $routeParams, BucketDetails) {
 		$scope.bucketName = $routeParams.name;
-		$scope.bucketDetails = BucketDetails.query({bucketName : $routeParams.name});
+		$scope.prefixName = $routeParams.prefix;
+		$scope.bucketDetails = BucketDetails.query({bucketName : $routeParams.name, prefixName : $routeParams.prefix});
 	}]);
